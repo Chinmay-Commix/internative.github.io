@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>GrapesJS Demo - Free Open Source Newsletter Editor</title>
+      <meta content="Best Free Open Source Responsive No-Code Newsletter HTML Email Builder" name="description">
+      <link rel="stylesheet" href="/assets/assets/css/grapes.min.css?v0.21.6">
+      <link rel="stylesheet" href="/assets/assets/css/material.css">
+      <link rel="stylesheet" href="/assets/assets/css/tooltip.css">
+      <link rel="stylesheet" href="/assets/assets/css/demos.css?v2">
+      <script src="/assets/assets/js/grapes.min.js?v0.21.6"></script>
+      <!-- <script src="./js/ckeditor/ckeditor.js"></script> -->
+      <!-- <script src="https://unpkg.com/grapesjs-plugin-ckeditor@0.0.10"></script> -->
+      <script src="/assets/assets/js/editor.js"></script>
+      <script src="https://unpkg.com/grapesjs-preset-newsletter@1.0.1"></script>
+   </head>
+   <style>
+      .nl-link {
+      color: inherit;
+      }
+      .gjs-logo-version {
+      background-color: #5a606d;
+      }
+      .cke_toolbar.cke_toolbar {
+      min-height: 33px;
+      }
+   </style>
+   <body>
+      
+      <div id="gjs" style="height:0px; overflow:hidden">
+         <table class="main-body">
+           
+         </table>
+         <style>
+            .link {
+            color: rgb(131, 200, 217);
+            }
+            .row{
+            vertical-align:top;
+            }
+            .main-body{
+            min-height:150px;
+            padding: 5px;
+            width:100%;
+            height:100%;
+            background-color:rgb(234, 236, 237);
+            }
+           
+         </style>
+      </div>
+      
+      <form id="test-form" class="test-form" action="//grapes.16mb.com/s" method="POST" style="display:none">
+         <div class="putsmail-c">
+            <a href="https://putsmail.com/" target="_blank">
+            <img src="images/logo.png" style="opacity:0.85;" />
+            </a>
+            <div class="gjs-sm-property" style="font-size: 10px">
+               Test delivering offered by <a class="nl-link" href="https://litmus.com/" target="_blank">Litmus</a> with <a class="nl-link" href="https://putsmail.com/" target="_blank">Putsmail</a>
+               <span class="form-status" style="opacity: 0">
+               <i class="fa fa-refresh anim-spin" aria-hidden="true"></i>
+               </span>
+            </div>
+         </div>
+         <div class="gjs-sm-property">
+            <div class="gjs-field">
+               <span id="gjs-sm-input-holder">
+               <input type="email" name="email" placeholder="Email" required>
+               </span>
+            </div>
+         </div>
+         <div class="gjs-sm-property">
+            <div class="gjs-field">
+               <span id="gjs-sm-input-holder">
+               <input type="text" name="subject" placeholder="Subject" required>
+               </span>
+            </div>
+         </div>
+         <input type="hidden" name="body">
+         <button class="gjs-btn-prim gjs-btn-import" style="width: 100%">SEND</button>
+      </form>
+      <div id="info-panel" style="display:none">
+         <br/>
+         <svg class="info-panel-logo" xmlns="//www.w3.org/2000/svg" version="1">
+            <g id="gjs-logo">
+               <path d="M40 5l-12.9 7.4 -12.9 7.4c-1.4 0.8-2.7 2.3-3.7 3.9 -0.9 1.6-1.5 3.5-1.5 5.1v14.9 14.9c0 1.7 0.6 3.5 1.5 5.1 0.9 1.6 2.2 3.1 3.7 3.9l12.9 7.4 12.9 7.4c1.4 0.8 3.3 1.2 5.2 1.2 1.9 0 3.8-0.4 5.2-1.2l12.9-7.4 12.9-7.4c1.4-0.8 2.7-2.2 3.7-3.9 0.9-1.6 1.5-3.5 1.5-5.1v-14.9 -12.7c0-4.6-3.8-6-6.8-4.2l-28 16.2" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:10;stroke:#fff"/>
+            </g>
+         </svg>
+         <br/>
+         <div class="info-panel-label">
+            <b>Internative Email Builder Builder</b> is an advanced email designer with lots of default options including import HTML or designing them manually.
+         </div>
+      </div>
+      <div style="display: none">
+         <div class="gjs-logo-cont">
+            <a href="//grapesjs.com"><img class="gjs-logo" src="images/logo.png"></a>
+            <div class="gjs-logo-version"></div>
+         </div>
+      </div>
+      <script type="text/javascript">
+         var host = 'https://grapesjs.com/';
+         
+         // Set up GrapesJS editor with the Newsletter plugin
+         var editor = grapesjs.init({
+           selectorManager: { componentFirst: true },
+           clearOnRender: true,
+           height: '90%',
+           storageManager: {
+             options: {
+               local: { key: 'gjsProjectNl' }
+             }
+           },
+           assetManager: {
+             assets: [
+               host + 'img/grapesjs-logo.png',
+               host + 'img/tmp-blocks.jpg',
+               host + 'img/tmp-tgl-images.jpg',
+               host + 'img/tmp-send-test.jpg',
+               host + 'img/tmp-devices.jpg',
+             ],
+             upload: false,
+             uploadText: 'Uploading is not available in this demo',
+           },
+           container : '#gjs',
+           fromElement: true,
+           plugins: ['grapesjs-preset-newsletter', 'grapesjs-plugin-ckeditor'],
+           pluginsOpts: {
+             'grapesjs-preset-newsletter': {
+               modalLabelImport: 'Paste all your code here below and click import',
+               modalLabelExport: 'Copy the code and use it wherever you want',
+               codeViewerTheme: 'material',
+               importPlaceholder: '<table class="table"><tr><td class="cell">Hello world!</td></tr></table>',
+               cellStyle: {
+                 'font-size': '12px',
+                 'font-weight': 300,
+                 'vertical-align': 'top',
+                 color: 'rgb(111, 119, 125)',
+                 margin: 0,
+                 padding: 0,
+               }
+             },
+             'grapesjs-plugin-ckeditor': {
+               onToolbar: el => {
+                 el.style.minWidth = '350px';
+               },
+               options: {
+                 startupFocus: true,
+                 extraAllowedContent: '*(*);*{*}', // Allows any class and any inline style
+                 allowedContent: true, // Disable auto-formatting, class removing, etc.
+                 enterMode: 1, // CKEDITOR.ENTER_BR,
+                 extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
+                 toolbar: [
+                   { name: 'styles', items: ['Font', 'FontSize' ] },
+                   ['Bold', 'Italic', 'Underline', 'Strike'],
+                   {name: 'paragraph', items : [ 'NumberedList', 'BulletedList']},
+                   {name: 'links', items: ['Link', 'Unlink']},
+                   {name: 'colors', items: [ 'TextColor', 'BGColor' ]},
+                 ],
+               }
+             }
+           }
+         });
+         
+         
+         // Let's add in this demo the possibility to test our newsletters
+         var pnm = editor.Panels;
+         var cmdm = editor.Commands;
+         var md = editor.Modal;
+         
+         // Add info command
+         var infoContainer = document.getElementById("info-panel");
+         cmdm.add('open-info', {
+           run: function(editor, sender) {
+             var mdlClass = 'gjs-mdl-dialog-sm';
+             sender.set('active', 0);
+             var mdlDialog = document.querySelector('.gjs-mdl-dialog');
+             mdlDialog.className += ' ' + mdlClass;
+             infoContainer.style.display = 'block';
+             md.open({
+               title: 'About this demo',
+               content: infoContainer,
+             });
+             md.getModel().once('change:open', function() {
+               mdlDialog.className = mdlDialog.className.replace(mdlClass, '');
+             })
+           }
+         });
+         
+         // Add info button
+         const iconStyle = 'style="display: block; max-width: 22px"';
+         pnm.addButton('options', [{
+           id: 'view-info',
+           label: `<svg ${iconStyle} viewBox="0 0 24 24">
+               <path fill="currentColor" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+           </svg>`,
+           command: 'open-info',
+           attributes: {
+             'title': 'About',
+             'data-tooltip-pos': 'bottom',
+           },
+         }]);
+         
+         // Beautify tooltips
+         [
+           ['sw-visibility', 'Show Borders'],
+           ['preview', 'Preview'],
+           ['fullscreen', 'Fullscreen'],
+           ['export-template', 'Export'],
+           ['undo', 'Undo'],
+           ['redo', 'Redo'],
+           ['gjs-open-import-template', 'Import'],
+           ['gjs-toggle-images', 'Toggle images'],
+           ['canvas-clear', 'Clear canvas'],
+           ['open-sm', 'Style Manager'],
+           ['open-layers', 'Layers'],
+           ['open-blocks', 'Blocks']
+         ].forEach(function(item) {
+           pnm.getButton('options', item[0]).set('attributes', {title: item[1], 'data-tooltip-pos': 'bottom'});
+         });
+         // [
+         //   ['open-sm', 'Style Manager'],
+         //   ['open-layers', 'Layers'],
+         //   ['open-blocks', 'Blocks']
+         // ].forEach(function(item) {
+         //   pnm.getButton('views', item[0]).set('attributes', { title: item[1], 'data-tooltip-pos': 'bottom', title2: item[1] });
+         //   console.log('views', item[0], pnm.getButton('views', item[0]).get('attributes'))
+         // });
+         
+         var titles = document.querySelectorAll('*[title]');
+         for (var i = 0; i < titles.length; i++) {
+           var el = titles[i];
+           var title = el.getAttribute('title');
+           title = title ? title.trim(): '';
+           if(!title)
+             break;
+           el.setAttribute('data-tooltip', title);
+           el.setAttribute('title', 'Untitled');
+         }
+         
+         // Update canvas-clear command
+         cmdm.add('canvas-clear', function() {
+           if(confirm('Are you sure to clean the canvas?')) {
+             editor.runCommand('core:canvas-clear')
+             setTimeout(function(){ localStorage.clear()}, 0)
+           }
+         });
+         
+         // Do stuff on load
+         editor.onReady(function() {
+           // Show borders by default
+           pnm.getButton('options', 'sw-visibility').set('active', 1);
+         
+           // Show logo with the version
+           var logoCont = document.querySelector('.gjs-logo-cont');
+           document.querySelector('.gjs-logo-version').innerHTML = 'v' + grapesjs.version;
+           var logoPanel = document.querySelector('.gjs-pn-commands');
+           logoPanel.appendChild(logoCont);
+         
+           // Wait for CKEDITOR load
+
+         });
+      </script>
+
+      <form class="template-form" onsubmit="event.preventDefault(); submitEmailTemplateForm();" id="submitForm">
+         <input type="text" name="title" id="template_title" />
+         <button id="template_submit_button">Save</button>
+      </form>
+
+      <script>
+         function submitEmailTemplateForm() {
+            console.log(
+               JSON.stringify({
+                  title: document.getElementById('template_title').value,
+                  html: editor.runCommand('gjs-get-inlined-html'),
+                  css: editor.getCss(),
+                  html_with_css: editor.runCommand('gjs-get-inlined-html')
+               })
+            );
+         }
+      </script>
+      
+   </body>
+</html>
